@@ -1,0 +1,22 @@
+extend schema
+
+@link(
+  url: "https://specs.apollo.dev/federation/v2.3",
+  import: [
+    "@key", "@extends", "@shareable", "@inaccessible", "@override", "@external", "@provides", "@requires", "@tag",
+    "@composeDirective", "@interfaceObject"
+  ]
+)
+
+type Query {
+  stock: Stock
+}
+
+
+type Stock @key(fields: "id") {
+  id: ID!
+  name: String
+  currentPrice: Int @external
+  latestNews: String
+  action: String @requires(fields: "currentPrice")
+}

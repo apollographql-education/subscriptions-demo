@@ -1,0 +1,25 @@
+extend schema
+    @link(
+      url: "https://specs.apollo.dev/federation/v2.3",
+      import: [
+        "@key", "@extends", "@shareable", "@inaccessible", "@override", "@external", "@provides", "@requires", "@tag",
+        "@composeDirective", "@interfaceObject"
+      ]
+    )
+
+  type Query {
+    currentPrice: Int
+  }
+
+  type Subscription {
+    stockPriceChange(id: ID!): Stock
+  }
+
+  type Mutation {
+    changePrice(stockId: ID!, newPrice: Int!): Int
+  }
+
+  type Stock @key(fields: "id") {
+    id: ID!
+    currentPrice: Int
+  }

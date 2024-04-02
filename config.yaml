@@ -1,0 +1,14 @@
+supergraph:
+  introspection: true
+include_subgraph_errors:
+  all: true # Propagate errors from all subgraphs
+subscription:
+  enabled: true
+  mode:
+    callback:
+      public_url: http://127.0.0.1:4000/callback # The router's public URL, which your subgraphs access, must include the path configured on the router
+      listen: 127.0.0.1:4000 # The IP address and port the router will listen on for subscription callbacks, for security reasons it might be better to expose on another port that is only available from your internal network
+      path: /callback # The path of the router's callback endpoint
+      heartbeat_interval: 15s
+      subgraphs: # The list of subgraphs that use the HTTP callback protocol
+        - prices
